@@ -1,0 +1,49 @@
+.all_logs--container {
+  text-align: left;
+}
+
+.transaction_header {
+  font-size: 18px;
+  font-weight: bold;
+  margin-block: 16px;
+}
+
+.transaction_header span {
+  margin: 16px;
+  font-size: 32px;
+}
+
+.logs_info--log {
+  margin: 32px;
+  padding: 8px;
+  box-shadow: 0px 0px 5px 5px #ddd;
+}
+
+.log-data {
+  margin: 24px 8px;
+  display: flex;
+  justify-content: space-between;
+  overflow-wrap: break-word;
+}
+
+.log-data__key {
+  font-weight: bold;
+  font-size: 19px;
+}
+
+.log-data__value {
+  width: 60%;
+}
+
+.topic-number_header {
+  font-weight: bold;
+}
+
+.topic-number_topic {
+  font-style: italic;
+}
+
+.log-number {
+  font-size: 32px;
+  font-weight: bolder;
+}

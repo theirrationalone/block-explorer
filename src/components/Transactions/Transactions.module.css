@@ -1,0 +1,52 @@
+.txs--div_header {
+  text-align: left;
+  margin: 32px 32px;
+  font-weight: bolder;
+  font-size: 32px;
+}
+
+.txs_table {
+  table-layout: fixed;
+  width: 95%;
+  border-collapse: collapse;
+  margin: 16px auto;
+}
+
+.txs_header {
+  width: 100%;
+  border: 0.3px solid #ccc;
+}
+
+.txs_header th:nth-child(1) {
+  width: 5%;
+  padding: 16px;
+}
+
+.txs_header th:nth-child(2) {
+  width: 23.75%;
+  padding: 16px;
+}
+
+.txs_header th:nth-child(3) {
+  width: 23.75%;
+  padding: 16px;
+}
+
+.txs_header th:nth-child(4) {
+  width: 23.75%;
+  padding: 16px;
+}
+
+.txs_header th:nth-child(5) {
+  width: 23.75%;
+  padding: 16px;
+}
+
+.tx_dat_row td {
+  padding: 8px;
+  cursor: pointer;
+}
+
+.tx_dat_row:hover {
+  background: #e1e1e9;
+}
