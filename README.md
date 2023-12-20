@@ -76,3 +76,22 @@ Do not remove the `REACT_APP_` prefix. React uses that to import env variables.
 Running the command above will run the app in the development mode. Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The webpage will automatically reload when you make code changes.
+
+## 4. Play ▶
+
+It's a Complete Finished Project Repo. So you can walk & play around it.
+
+Info Access...
+
+- Block (Latest or arbitrary any!)
+- Parent Block
+- Transactions (List)
+- Transaction (Any arbitrary tx)
+- Logs (Logs of a specific tx)
+- Accounts (Accounts addresses maintained by us (Humans))
+
+<br>
+<br>
+<br>
+
+# THANK YOU ;`)
