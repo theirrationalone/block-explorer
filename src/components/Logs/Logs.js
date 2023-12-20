@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, NavLink } from "react-router-dom";
 
 import classes from "./Logs.module.css";
 
@@ -12,9 +12,11 @@ const Logs = ({ alchemy }) => {
   useEffect(() => {
     const logsHandler = async (tx_hash) => {
       setIsFetching(true);
-      const txReceipt = await alchemy.core.getTransactionReceipt(tx_hash);
+      try {
+        const txReceipt = await alchemy.core.getTransactionReceipt(tx_hash);
+        setLogs(txReceipt.logs);
+      } catch (e) {}
       setIsFetching(false);
-      setLogs(txReceipt.logs);
     };
 
     logsHandler(tx_hash);
@@ -35,7 +37,7 @@ const Logs = ({ alchemy }) => {
         if (logData.toLowerCase() === "topics") {
           const topics = log[logData].map((topic, topicIdx) => {
             return (
-              <div className={classes["topic-container"]}>
+              <div key={topicIdx + logData} className={classes["topic-container"]}>
                 <span className={classes["topic-number_header"]}>Topic #{topicIdx + 1}: </span>
                 <span className={classes["topic-number_topic"]}>{topic}</span>
               </div>
@@ -46,6 +48,19 @@ const Logs = ({ alchemy }) => {
             <div key={logData} className={classes["log-data"]}>
               <span className={classes["log-data__key"]}>{logData}:</span>
               <span className={classes["log-data__value"]}>{topics}</span>
+            </div>
+          );
+
+          continue;
+        }
+
+        if (logData.toLowerCase() === "transactionhash") {
+          singleLogData.push(
+            <div key={logData} className={classes["log-data"]}>
+              <span className={classes["log-data__key"]}>{logData}:</span>
+              <span className={classes["log-data__value"]}>
+                <NavLink to={`/transaction/${tx_hash}`}>{tx_hash}</NavLink>
+              </span>
             </div>
           );
 
@@ -76,7 +91,7 @@ const Logs = ({ alchemy }) => {
   return (
     <div className={classes["all_logs--container"]}>
       <div className={classes["transaction_header"]}>
-        <span>Tx Hash:</span> {tx_hash}
+        <span>Tx Hash:</span> <NavLink to={`/transaction/${tx_hash}`}>{tx_hash}</NavLink>
       </div>
       <div className={classes["logs_data--container"]}>{allLogs}</div>
     </div>

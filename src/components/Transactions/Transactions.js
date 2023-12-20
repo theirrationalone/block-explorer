@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams, useHistory } from "react-router-dom";
+import { useParams, useHistory, NavLink } from "react-router-dom";
 
 import classes from "./Transactions.module.css";
 
@@ -47,7 +47,9 @@ const Transactions = (props) => {
     <div>Loading...</div>
   ) : !!transactionsElements ? (
     <div className={classes["transactions_container"]}>
-      <div className={classes["txs--div_header"]}>Transactions: #{block}</div>
+      <div className={classes["txs--div_header"]}>
+        Transactions: #<NavLink to={`/block/${block}`}>{block}</NavLink>
+      </div>
       <table className={classes["txs_table"]}>
         <thead className={classes["txs_header"]}>
           <tr className={classes["tx_row"]}>

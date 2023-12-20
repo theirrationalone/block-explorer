@@ -1,0 +1,113 @@
+.address-info__container {
+  text-align: left;
+  margin: 32px 16px;
+  display: flex;
+  flex-flow: column;
+}
+
+.address-info__address {
+  display: flex;
+  align-items: center;
+  margin-block: 32px;
+}
+
+.address-info__address-pic {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background-color: #a6b7c7;
+  margin: 8px;
+}
+
+.address-info__address-text {
+  font-style: italic;
+  padding: 8px;
+  background: #eee;
+}
+
+.address-info__address-text span {
+  font-style: normal;
+  font-size: 24px;
+  font-weight: bolder;
+}
+
+.address-info__address-copy_access {
+  border: 0.4px solid #bbb;
+  width: 15px;
+  height: 20px;
+  position: relative;
+  margin-inline: 12px;
+  cursor: pointer;
+}
+
+.address-info__address-copy_access-inner {
+  border: 0.4px solid #bbb;
+  width: 15px;
+  height: 20px;
+  position: absolute;
+  top: -4px;
+  left: 5px;
+  background: white;
+  border-top-right-radius: 10px;
+}
+
+.address-info__address-copy_access:active,
+.address-info__address-copy_access-inner:active {
+  border-color: yellow;
+}
+
+.address-info__categories {
+  display: flex;
+  justify-content: space-between;
+}
+
+.address-info__overview {
+  border-radius: 16px;
+  box-shadow: 0px 0px 5px 5px #eee;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+}
+
+.address-info__overview-header {
+  font-weight: bold;
+  font-size: 24px;
+  margin-bottom: 16px;
+}
+
+.address-info__balances-ether {
+  box-shadow: 0px 0px 2px 1px #eee;
+  padding: 8px;
+  margin: 8px;
+  border-radius: 8px;
+}
+
+.address-info__-header {
+  color: #aaa;
+}
+
+.address-info__value table {
+  table-layout: fixed;
+  width: 95%;
+  border-collapse: collapse;
+  margin: 16px auto;
+}
+
+.address-info__value table thead {
+  width: 100%;
+  border: 0.3px solid #ccc;
+}
+
+.address-info__value table thead th:nth-child(1) {
+  width: 50%;
+  padding: 16px;
+}
+
+.address-info__value table thead th:nth-child(2) {
+  width: 50%;
+  padding: 16px;
+}
+
+.crypto_token td {
+  padding: 8px;
+}

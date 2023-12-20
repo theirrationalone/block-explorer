@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, useParams, useHistory } from "react-router-dom";
 
 import classes from "./Block.module.css";
 
@@ -8,21 +8,42 @@ const Block = (props) => {
   const [blockDetails, setBlockDetails] = useState();
   const [isFetching, setisFetching] = useState(false);
 
+  const { blockNum } = useParams();
+
+  const history = useHistory();
+
   const { alchemy } = props;
 
   useEffect(() => {
     async function getBlockNumber() {
-      setBlockNumber(await alchemy.core.getBlockNumber());
+      if (!!blockNum) {
+        setBlockNumber(+blockNum);
+      } else {
+        setBlockNumber(await alchemy.core.getBlockNumber());
+      }
     }
 
     getBlockNumber();
-  }, [alchemy.core]);
+  }, [alchemy.core, blockNum]);
 
   const blockNumberDetailsHandler = async (blockNumber) => {
     setisFetching(true);
-    const blockDetails = await alchemy.core.getBlockWithTransactions(blockNumber);
+    try {
+      const blockDetails = await alchemy.core.getBlockWithTransactions(blockNumber);
+      setBlockDetails(blockDetails);
+    } catch (e) {
+      console.log("e:", e);
+    }
     setisFetching(false);
-    setBlockDetails(blockDetails);
+  };
+
+  const parentHashHandler = async (parentHash) => {
+    try {
+      setisFetching(true);
+      const parentBlockNumber = await alchemy.core.getBlockNumber(parentHash);
+      setisFetching(false);
+      history.push(`/block/${parentBlockNumber}`);
+    } catch (e) {}
   };
 
   let blockDetailsContainer;
@@ -52,6 +73,38 @@ const Block = (props) => {
           <div key={data} className={classes["block-details__info"]}>
             <span className={classes["block-details__info-key"]}>{data}: </span>{" "}
             <span className={classes["block-details__info-value"]}>{parseInt(blockDetails[data])} Wei</span>
+          </div>
+        );
+
+        continue;
+      }
+
+      if (data.toLowerCase() === "parenthash") {
+        blockDetailsElements.push(
+          <div key={data} className={classes["block-details__info"]}>
+            <span className={classes["block-details__info-key"]}>{data}: </span>{" "}
+            <span
+              className={classes["block-details__info-value"] + " " + classes["block-link"]}
+              onClick={parentHashHandler.bind(null, blockDetails[data])}
+            >
+              {blockDetails[data]}
+            </span>
+          </div>
+        );
+
+        continue;
+      }
+
+      if (data.toLowerCase() === "miner") {
+        blockDetailsElements.push(
+          <div key={data} className={classes["block-details__info"]}>
+            <span className={classes["block-details__info-key"]}>{data}: </span>{" "}
+            <NavLink
+              to={`/address/${blockDetails[data]}`}
+              className={classes["block-details__info-value"] + " " + classes["block-link"]}
+            >
+              {blockDetails[data]}
+            </NavLink>
           </div>
         );
 

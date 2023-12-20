@@ -69,6 +69,23 @@ const Transaction = ({ alchemy }) => {
         continue;
       }
 
+      if (data.toLowerCase() === "blocknumber" || data.toLowerCase() === "from" || data.toLowerCase() === "to") {
+        transactionReceiptWrapper.push(
+          <div key={data} className={classes["transaction-details__info"]}>
+            <span className={classes["transaction-details__info-key"]}>{data}: </span>{" "}
+            <span className={classes["transaction-details__info-value"]}>
+              <NavLink
+                to={`/${data.toLowerCase() === "blocknumber" ? "block" : "address"}/${transactionReceipt[data]}`}
+              >
+                {transactionReceipt[data]}
+              </NavLink>
+            </span>
+          </div>
+        );
+
+        continue;
+      }
+
       transactionReceiptWrapper.push(
         <div key={data} className={classes["transaction-details__info"]}>
           <span className={classes["transaction-details__info-key"]}>{data}: </span>{" "}
